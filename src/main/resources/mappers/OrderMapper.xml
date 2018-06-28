@@ -4,30 +4,68 @@
   <resultMap id="BaseResultMap" type="com.mmall.pojo.Order" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="shipping_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orderNo" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="shippingId" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="payment" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="payment_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="paymentType" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="postage" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="payment_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="send_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="end_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="close_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="paymentTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="sendTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="endTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="closeTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, order_no, user_id, shipping_id, payment, payment_type, postage, status, payment_time, 
-    send_time, end_time, close_time, create_time, update_time
+    id,
+    order_no AS orderNo,
+    user_id AS userId,
+    shipping_id AS shippingId,
+    payment,
+    payment_type AS paymentType,
+    postage,
+    status,
+    payment_time AS paymentTime,
+    send_time AS sendTime,
+    end_time AS endTime,
+    close_time AS closeTime,
+    create_time AS createTime,
+    update_time AS updateTime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from mmall_order
     where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByOrderNoUserId" resultType="com.mmall.pojo.Order" parameterType="map">
+      SELECT
+      <include refid="Base_Column_List"/>
+      FROM mmall_order
+      WHERE order_no=#{orderNo}
+      and user_id=#{userId}
+    </select>
+  <select id="selectByOrderNo" resultType="com.mmall.pojo.Order" parameterType="long">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM mmall_order
+    WHERE order_no=#{orderNo}
+  </select>
+    <select id="selectByUserId" resultType="com.mmall.pojo.Order" parameterType="integer">
+      SELECT
+      <include refid="Base_Column_List"/>
+      FROM mmall_order
+      WHERE user_id=#{userId}
+      order by create_time desc
+    </select>
+  <select id="selectAllOrders" resultType="com.mmall.pojo.Order">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM mmall_order
+    ORDER BY create_time DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_order
