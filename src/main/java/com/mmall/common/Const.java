@@ -9,10 +9,16 @@ public class Const {
     public static final String USERNAME = "username";
     public static final String EMAIL = "email";
 
+    public static final String TOKEN_PREFIX = "token_";
+
     public interface orderBy{
         Set<String> PRODUCT_ASC_DESC= Sets.newHashSet("price_desc","price_asc");
     }
 
+    public interface RedisCacheExtime{
+        int REDIS_EXTIME=60*30;
+        int FORGET_TOKEN=60*60*12;
+    }
     public interface Role {
         int ROLE_CUSTOMER = 0;//普通用户
         int ROLE_ADMIN = 1;//管理员
