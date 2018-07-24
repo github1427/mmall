@@ -78,12 +78,11 @@ public class CloseOrderTask {
         boolean getLock=false;
         RLock rLock=redissonManager.getRedisson().getLock(Const.RedisLock.CLOSE_ORDER_TASK_LOCK);
         try {
-            log.info("Redisson获取分布式锁:{} ThreadName:{}",Const.RedisLock.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
             if (getLock=rLock.tryLock(0,5, TimeUnit.SECONDS)){
-                log.info("Redisson获取分布式锁:{} 成功  ThreadName:{}",Const.RedisLock.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
+                log.info("Redisson获取到分布式锁:{} 成功  ThreadName:{}",Const.RedisLock.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
                 //iOrderService.closeOrderByHour(Integer.valueOf(PropertiesUtil.getProperty("close.order.task.time","2")));
             }else {
-                log.info("Redisson获取分布式锁:{} 失败  ThreadName:{}",Const.RedisLock.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
+                log.info("Redisson没有获取到分布式锁:{} ThreadName:{}",Const.RedisLock.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
             }
         } catch (InterruptedException e) {
             log.error("Redisson获取分布式锁异常",e);
@@ -92,7 +91,7 @@ public class CloseOrderTask {
                 return;
             }
             rLock.unlock();
-            log.info("Redisson释放分布式锁:{} ThreadName:{}",Const.RedisLock.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
+            log.info("Redisson释放分布式锁");
         }
     }
 
