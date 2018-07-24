@@ -40,7 +40,7 @@ public class OrderController {
     @Autowired
     IOrderService iOrderService;
 
-    @RequestMapping("/pay")
+    @RequestMapping("/pay.do")
     @ResponseBody
     public ServerResponse<Map<String,String>> pay(HttpServletRequest httpServletRequest, Long orderNo, HttpServletRequest request){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -56,7 +56,7 @@ public class OrderController {
         return iOrderService.payOrder(orderNo,user.getId(),path);
     }
 
-    @RequestMapping("/alipay_callback")
+    @RequestMapping("/alipay_callback.do")
     @ResponseBody
     public Object alipayCallback(HttpServletRequest request){
         Map<String,String> params= Maps.newHashMap();
@@ -87,7 +87,7 @@ public class OrderController {
         return Const.AlipayCallback.RESPONSE_FAILED;
     }
 
-    @RequestMapping("/query_order_pay_status")
+    @RequestMapping("/query_order_pay_status.do")
     @ResponseBody
     public ServerResponse<Boolean> queryOrderPayStatus(HttpServletRequest httpServletRequest,Long orderNo){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -102,7 +102,7 @@ public class OrderController {
         return iOrderService.queryOrderPayStatus(user.getId(),orderNo);
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/create.do")
     @ResponseBody
     public ServerResponse createOrder(HttpServletRequest httpServletRequest,Integer shippingId){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -117,7 +117,7 @@ public class OrderController {
         return iOrderService.createOrder(user.getId(),shippingId);
     }
 
-    @RequestMapping("/cancel")
+    @RequestMapping("/cancel.do")
     @ResponseBody
     public ServerResponse cancelOrder(HttpServletRequest httpServletRequest,Long orderNo){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -132,7 +132,7 @@ public class OrderController {
         return iOrderService.cancelOrder(user.getId(),orderNo);
     }
 
-    @RequestMapping("/get_order_cart_product")
+    @RequestMapping("/get_order_cart_product.do")
     @ResponseBody
     public ServerResponse getOrderCartProduct(HttpServletRequest httpServletRequest){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -147,7 +147,7 @@ public class OrderController {
         return iOrderService.getOrderCartProduct(user.getId());
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.do")
     @ResponseBody
     public ServerResponse<PageInfo> orderList(HttpServletRequest httpServletRequest,
                                               @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
@@ -164,7 +164,7 @@ public class OrderController {
         return iOrderService.orderList(user.getId(),pageNum,pageSize);
     }
 
-    @RequestMapping("/detail")
+    @RequestMapping("/detail.do")
     @ResponseBody
     public ServerResponse<OrderVo> orderDetail(HttpServletRequest httpServletRequest, Long orderNo){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);

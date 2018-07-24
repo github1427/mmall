@@ -25,4 +25,6 @@ public interface OrderMapper {
     List<Order> selectByUserId(Integer userId);
 
     List<Order> selectAllOrders();
+
+    List<Order> selectOrderByStatusAndHour(@Param("status")Integer status,@Param("date") String date);
 }

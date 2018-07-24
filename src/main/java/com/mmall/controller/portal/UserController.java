@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session, HttpServletResponse httpServletResponse) {
         ServerResponse<User> response = iUserService.login(username, password);
@@ -36,19 +36,19 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse register(User user) {
         return iUserService.register(user);
     }
 
-    @RequestMapping(value = "/check_valid", method = RequestMethod.GET)
+    @RequestMapping(value = "/check_valid.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse checkValid(String str, String type) {
         return iUserService.checkValid(str, type);
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse logout(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -57,7 +57,7 @@ public class UserController {
         return ServerResponse.createBySuccessMessage("退出成功");
     }
 
-    @RequestMapping(value = "/get_user_info", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_user_info.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpServletRequest httpServletRequest) {
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -73,25 +73,25 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/forget_get_question", method = RequestMethod.GET)
+    @RequestMapping(value = "/forget_get_question.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<String> forgetGetQuestion(String username) {
         return iUserService.forgetGetQuestion(username);
     }
 
-    @RequestMapping(value = "/forget_check_answer", method = RequestMethod.GET)
+    @RequestMapping(value = "/forget_check_answer.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<String> forgetCheckAnswer(String username, String question, String answer) {
         return iUserService.forgetCheckAnswer(username, question, answer);
     }
 
-    @RequestMapping(value = "/forget_reset_password", method = RequestMethod.GET)
+    @RequestMapping(value = "/forget_reset_password.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse forgetResetPassword(String username, String passwordNew, String forgetToken) {
         return iUserService.forgetResetPassword(username, passwordNew, forgetToken);
     }
 
-    @RequestMapping(value = "/reset_password", method = RequestMethod.GET)
+    @RequestMapping(value = "/reset_password.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse resetPassword(String passwordOld, String passwordNew, HttpServletRequest httpServletRequest) {
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -106,7 +106,7 @@ public class UserController {
         return iUserService.resetPassword(passwordOld, passwordNew, user);
     }
 
-    @RequestMapping(value = "/update_information", method = RequestMethod.GET)
+    @RequestMapping(value = "/update_information.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> updateInformation(User user, HttpServletRequest httpServletRequest) {
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -128,7 +128,7 @@ public class UserController {
         return serverResponse;
     }
 
-    @RequestMapping(value = "/get_information", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_information.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> getInformation(HttpServletRequest httpServletRequest) {
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);

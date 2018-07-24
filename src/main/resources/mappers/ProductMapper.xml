@@ -61,6 +61,12 @@
         </foreach>
       </if>
     </select>
+    <select id="selectProductStockById" resultType="java.lang.Integer" parameterType="integer">
+      SELECT stock
+      FROM mmall_product
+      WHERE id=#{productId}
+      for update
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_product
     where id = #{id,jdbcType=INTEGER}

@@ -28,7 +28,7 @@ public class CategoryManageController {
     @Autowired
     private ICategoryService iCategoryService;
 
-    @RequestMapping(value = "/add_category", method = RequestMethod.GET)
+    @RequestMapping(value = "/add_category.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse addCategory(HttpServletRequest httpServletRequest, String categoryName, @RequestParam(value = "parentId", defaultValue = "0") Integer parentId) {
 //        String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -50,7 +50,7 @@ public class CategoryManageController {
 
     }
 
-    @RequestMapping(value = "/set_category_name", method = RequestMethod.GET)
+    @RequestMapping(value = "/set_category_name.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse setCategoryName(Integer categoryId, String categoryName, HttpServletRequest httpServletRequest) {
 //        String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -71,7 +71,7 @@ public class CategoryManageController {
         return iCategoryService.setCategoryName(categoryId, categoryName);
     }
 
-    @RequestMapping(value = "/get_category", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_category.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<List<Category>> getCategoryAndParallelChildrenCategory(HttpServletRequest httpServletRequest, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
 //        String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -92,7 +92,7 @@ public class CategoryManageController {
         return iCategoryService.getCategoryAndParallelChildrenCategory(categoryId);
     }
 
-    @RequestMapping(value = "/get_deep_category", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_deep_category.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<List<Integer>> getDeepCategory(HttpServletRequest httpServletRequest, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
 //        String loginToken= CookieUtil.readLoginToken(httpServletRequest);

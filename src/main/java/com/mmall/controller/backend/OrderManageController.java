@@ -27,7 +27,7 @@ public class OrderManageController {
     @Autowired
     private IUserService iUserService;
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.do")
     @ResponseBody
     public ServerResponse<PageInfo> manageOrderList(HttpServletRequest httpServletRequest,
                                                     @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
@@ -51,7 +51,7 @@ public class OrderManageController {
 
     }
 
-    @RequestMapping("/search")
+    @RequestMapping("/search.do")
     @ResponseBody
     public ServerResponse<PageInfo> manageOrderSearch(HttpServletRequest httpServletRequest,
                                                     Long orderNo,
@@ -77,7 +77,7 @@ public class OrderManageController {
 
     }
 
-    @RequestMapping("/detail")
+    @RequestMapping("/detail.do")
     @ResponseBody
     public ServerResponse<OrderVo> manageOrderDetail(HttpServletRequest httpServletRequest, Long orderNo) {
 //        String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -100,7 +100,7 @@ public class OrderManageController {
 
     }
 
-    @RequestMapping("/send_goods")
+    @RequestMapping("/send_goods.do")
     @ResponseBody
     public ServerResponse manageSendGoods(HttpServletRequest httpServletRequest, Long orderNo) {
 //        String loginToken= CookieUtil.readLoginToken(httpServletRequest);

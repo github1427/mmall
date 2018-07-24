@@ -36,4 +36,6 @@ public interface IOrderService {
     ServerResponse<OrderVo> manageOrderDetail(Long orderNo);
 
     ServerResponse manageSendGoods(Long orderNo);
+
+    void closeOrderByHour(Integer hours);
 }

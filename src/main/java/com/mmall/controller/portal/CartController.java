@@ -30,7 +30,7 @@ public class CartController {
     @Autowired
     private ICartService iCartService;
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.do")
     @ResponseBody
     public ServerResponse<CartVo> list(HttpServletRequest httpServletRequest){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -45,7 +45,7 @@ public class CartController {
         return iCartService.cartList(user.getId());
     }
 
-    @RequestMapping("/add")
+    @RequestMapping("/add.do")
     @ResponseBody
     public ServerResponse<CartVo> add(HttpServletRequest httpServletRequest,Integer productId,Integer count){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -60,7 +60,7 @@ public class CartController {
         return iCartService.addProductToCart(user.getId(),productId,count);
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("/update.do")
     @ResponseBody
     public ServerResponse<CartVo> update(HttpServletRequest httpServletRequest,Integer productId,Integer count){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -90,7 +90,7 @@ public class CartController {
         return iCartService.deleteProduct(user.getId(),productIds);
     }
 
-    @RequestMapping("/select")
+    @RequestMapping("/select.do")
     @ResponseBody
     public ServerResponse<CartVo> select(HttpServletRequest httpServletRequest,Integer productId){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -105,7 +105,7 @@ public class CartController {
         return iCartService.selectOrUnSelectProduct(user.getId(),productId,Const.Cart.PRODUCT_CHECKED);
     }
 
-    @RequestMapping("/un_select")
+    @RequestMapping("/un_select.do")
     @ResponseBody
     public ServerResponse<CartVo> un_select(HttpServletRequest httpServletRequest,Integer productId){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -120,7 +120,7 @@ public class CartController {
         return iCartService.selectOrUnSelectProduct(user.getId(),productId,Const.Cart.PRODUCT_UN_CHECKED);
     }
 
-    @RequestMapping("/select_all")
+    @RequestMapping("/select_all.do")
     @ResponseBody
     public ServerResponse<CartVo> selectAll(HttpServletRequest httpServletRequest){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -135,7 +135,7 @@ public class CartController {
         return iCartService.selectOrUnSelectProduct(user.getId(),null,Const.Cart.PRODUCT_CHECKED);
     }
 
-    @RequestMapping("/un_select_all")
+    @RequestMapping("/un_select_all.do")
     @ResponseBody
     public ServerResponse<CartVo> unSelectAll(HttpServletRequest httpServletRequest){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -150,7 +150,7 @@ public class CartController {
         return iCartService.selectOrUnSelectProduct(user.getId(),null,Const.Cart.PRODUCT_UN_CHECKED);
     }
 
-    @RequestMapping("/get_cart_product_count")
+    @RequestMapping("/get_cart_product_count.do")
     @ResponseBody
     public ServerResponse<Integer> getCartProductCount(HttpServletRequest httpServletRequest){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);

@@ -29,6 +29,7 @@ import com.mmall.vo.OrderVo;
 import com.mmall.vo.ShippingVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -683,6 +684,37 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
         return ServerResponse.createByErrorMessage("没有找到订单");
+    }
+
+    @Override
+    public void closeOrderByHour(Integer hours) {
+        /**
+         * create by: vain
+         * description: 规定时间内未支付则关闭订单
+         * create time: 下午12:19 2018/7/14
+         *
+         * @Param: hours
+         * @return void
+         */
+        Date date= DateUtils.addHours(new Date(),-hours);
+        List<Order> needCloseOrders=orderMapper.selectOrderByStatusAndHour(Const.OrderStatus.NO_PAY.getCode(),DateTimeUtil.dateToString(date));
+        for (Order order:needCloseOrders){
+            List<OrderItem> orderItems=orderItemMapper.selectByOrderNo(order.getOrderNo());
+            for (OrderItem orderItem:orderItems){
+                Integer productStock=productMapper.selectProductStockById(orderItem.getProductId());
+                //防止库存商品被删除
+                if (productStock==null){
+                    continue;
+                }
+                Product product=new Product();
+                product.setId(orderItem.getProductId());
+                product.setStock(orderItem.getQuantity()+productStock);
+                productMapper.updateByPrimaryKeySelective(product);
+            }
+            order.setStatus(Const.OrderStatus.CANCELED.getCode());
+            orderMapper.updateByPrimaryKey(order);
+        }
+
     }
 
 }

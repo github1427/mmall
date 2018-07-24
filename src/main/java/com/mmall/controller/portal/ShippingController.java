@@ -32,7 +32,7 @@ public class ShippingController {
     @Autowired
     IShippingService iShippingService;
 
-    @RequestMapping("/add")
+    @RequestMapping("/add.do")
     @ResponseBody
     public ServerResponse<Map<String,Integer>> add(HttpServletRequest httpServletRequest, Shipping shipping){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -47,7 +47,7 @@ public class ShippingController {
         return iShippingService.addShipping(user.getId(),shipping);
     }
 
-    @RequestMapping("/del")
+    @RequestMapping("/del.do")
     @ResponseBody
     public ServerResponse del(HttpServletRequest httpServletRequest, Integer shippingId){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -62,7 +62,7 @@ public class ShippingController {
         return iShippingService.deleteShipping(user.getId(),shippingId);
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("/update.do")
     @ResponseBody
     public ServerResponse update(HttpServletRequest httpServletRequest, Shipping shipping){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -77,7 +77,7 @@ public class ShippingController {
         return iShippingService.updateShipping(user.getId(),shipping);
     }
 
-    @RequestMapping("/select")
+    @RequestMapping("/select.do")
     @ResponseBody
     public ServerResponse<Shipping> select(HttpServletRequest httpServletRequest, Integer shippingId){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -92,7 +92,7 @@ public class ShippingController {
         return iShippingService.selectShipping(user.getId(),shippingId);
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.do")
     @ResponseBody
     public ServerResponse<PageInfo> list(HttpServletRequest httpServletRequest,
                                          @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,

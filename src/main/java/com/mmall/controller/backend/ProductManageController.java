@@ -38,7 +38,7 @@ public class ProductManageController {
     @Autowired
     private IFileService iFileService;
 
-    @RequestMapping("/save")
+    @RequestMapping("/save.do")
     @ResponseBody
     public ServerResponse save(HttpServletRequest httpServletRequest, Product product) {
 //        String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -61,7 +61,7 @@ public class ProductManageController {
 
     }
 
-    @RequestMapping("/set_sale_status")
+    @RequestMapping("/set_sale_status.do")
     @ResponseBody
     public ServerResponse setSaleStatus(HttpServletRequest httpServletRequest, Integer productId, Integer status) {
 //        String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -84,7 +84,7 @@ public class ProductManageController {
 
     }
 
-    @RequestMapping("/detail")
+    @RequestMapping("/detail.do")
     @ResponseBody
     public ServerResponse<ProductDetailVo> getProductDetail(HttpServletRequest httpServletRequest, Integer productId) {
 //        String loginToken=CookieUtil.readLoginToken(httpServletRequest);
@@ -107,7 +107,7 @@ public class ProductManageController {
 
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.do")
     @ResponseBody
     public ServerResponse<PageInfo> getList(HttpServletRequest httpServletRequest,
                                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
@@ -132,7 +132,7 @@ public class ProductManageController {
 
     }
 
-    @RequestMapping("/search")
+    @RequestMapping("/search.do")
     @ResponseBody
     public ServerResponse<PageInfo> productSearch(HttpServletRequest httpServletRequest,String productName,Integer productId,
                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
@@ -157,7 +157,7 @@ public class ProductManageController {
 
     }
 
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @RequestMapping(value = "/upload.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Map<String,String>> fileUpload(HttpServletRequest httpServletRequest, @RequestParam(value ="upload_file",required = false)MultipartFile file, HttpServletRequest request) {
 //        String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -198,7 +198,7 @@ public class ProductManageController {
 
     }
 
-    @RequestMapping(value = "/richtext_img_upload",method = RequestMethod.POST)
+    @RequestMapping(value = "/richtext_img_upload.do",method = RequestMethod.POST)
     @ResponseBody
     public Map richtextUpload(HttpServletRequest httpServletRequest, @RequestParam(value ="upload_file",required = false)MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
         Map map=Maps.newHashMap();

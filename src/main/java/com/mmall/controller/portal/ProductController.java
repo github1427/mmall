@@ -32,7 +32,7 @@ public class ProductController {
     @Autowired
     private IUserService iUserService;
 
-    @RequestMapping("/detail")
+    @RequestMapping("/detail.do")
     @ResponseBody
     public ServerResponse<ProductDetailVo> productDetail(HttpServletRequest httpServletRequest, Integer productId){
         String loginToken= CookieUtil.readLoginToken(httpServletRequest);
@@ -51,14 +51,14 @@ public class ProductController {
         }
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.do")
     @ResponseBody
     public ServerResponse<PageInfo> productList(HttpServletRequest httpServletRequest,
                                                 @RequestParam(value = "categoryId",required = false) Integer categoryId,
                                                 @RequestParam(value = "keyword",required = false) String keyword,
                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                 @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
-                                                @RequestParam(value = "orderBy",defaultValue = "")String orderBy){
+                                                @RequestParam(value = "orderBy",defaultValue = "price_asc")String orderBy){
         String loginToken=CookieUtil.readLoginToken(httpServletRequest);
         if (StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登陆，无法获取当前用户信息");
